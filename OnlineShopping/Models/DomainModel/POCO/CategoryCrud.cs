@@ -7,25 +7,24 @@ using System.Web;
 
 namespace OnlineShopping.Models.DomainModel.POCO
 {
-    public class PersonCrud
+    public class CategoryCrud
     {
         #region [- ctor -]
-        public PersonCrud()
+        public CategoryCrud()
         {
 
         }
         #endregion
-
-        #region [- Tasks -] 
+        #region [- Tasks -]
 
         #region [- Select() -]
-        public List<Models.DomainModel.DTO.EF.Person> Select()
+        public List<Category> Select()
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    var q = context.Person.ToList();
+                    var q = context.Category.ToList();
                     return q;
                 }
                 catch (Exception)
@@ -42,16 +41,16 @@ namespace OnlineShopping.Models.DomainModel.POCO
                 }
             }
         }
-        #endregion 
+        #endregion
 
-        #region [- Insert(Person ref_Person) -]
-        public void Insert(Person ref_Person)
+        #region [- Insert(Category ref_Category) -]
+        public void Insert(Category ref_Category)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    context.Person.Add(ref_Person);
+                    context.Category.Add(ref_Category);
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -72,14 +71,14 @@ namespace OnlineShopping.Models.DomainModel.POCO
         #endregion
 
         #region [- Find(int? id) -]
-        public Person Find(int? id)
+        public Category Find(int? id)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    Person person = context.Person.Find(id);
-                    return person;
+                    Category category = context.Category.Find(id);
+                    return category;
                 }
                 catch (Exception)
                 {
@@ -97,14 +96,14 @@ namespace OnlineShopping.Models.DomainModel.POCO
         }
         #endregion
 
-        #region [- Update(Person person) -]
-        public void Update(Person person)
+        #region [- Update(Category category) -]
+        public void Update(Category category)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    context.Entry(person).State = EntityState.Modified;
+                    context.Entry(category).State = EntityState.Modified;
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -125,14 +124,14 @@ namespace OnlineShopping.Models.DomainModel.POCO
         #endregion
 
         #region [- Delete(int id) -]
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    Person person = context.Person.Find(id);
-                    context.Person.Remove(person);
+                    Category category = context.Category.Find(id);
+                    context.Category.Remove(category);
                     context.SaveChanges();
 
                 }
@@ -151,7 +150,7 @@ namespace OnlineShopping.Models.DomainModel.POCO
 
             }
 
-        } 
+        }
         #endregion
 
         #endregion

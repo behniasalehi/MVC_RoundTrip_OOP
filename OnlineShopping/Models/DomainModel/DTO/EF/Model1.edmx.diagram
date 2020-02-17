@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c8602b4759c4af59eed8f2e17fefb39" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineShoppingModel.Person" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.Category" Width="1.5" PointX="3.75" PointY="1.375" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.Product" Width="1.5" PointX="6" PointY="1" />
-        <EntityTypeShape EntityType="OnlineShoppingModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" />
-        <AssociationConnector Association="OnlineShoppingModel.FK__Product__Categor__2B3F6F97" />
-        <AssociationConnector Association="OnlineShoppingModel.FK__Product__Categor__2B3F6F97" />
+      <Diagram DiagramId="a1eef5f19f56489b9e541a2f115f4cb5" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineShoppingModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Person" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.sysdiagrams" Width="1.5" PointX="5.5" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Product__Categor__2B3F6F97" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

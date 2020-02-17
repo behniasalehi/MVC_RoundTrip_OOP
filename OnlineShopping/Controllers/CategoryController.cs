@@ -8,34 +8,33 @@ using System.Web.Mvc;
 
 namespace OnlineShopping.Controllers
 {
-    
-    public class PersonController : Controller
+    public class CategoryController : Controller
     {
+
         #region [- ctor -]
-        public PersonController()
+        public CategoryController()
         {
-            Ref_PersonCrud = new Models.DomainModel.POCO.PersonCrud();
+            Ref_CategoryCrud = new Models.DomainModel.POCO.CategoryCrud();
         }
         #endregion
-        #region [- props -]
-        public Models.DomainModel.POCO.PersonCrud Ref_PersonCrud { get; set; }
-        #endregion
 
+        #region [- props -]
+        public Models.DomainModel.POCO.CategoryCrud Ref_CategoryCrud{ get; set; }
+        #endregion
         #region [- Actions -]
 
         #region [- Index() -]
-        // GET: Person
-        //[Route("index")]
+        // GET: Category
         public ActionResult Index()
         {
-            return View(Ref_PersonCrud.Select());
+            return View(Ref_CategoryCrud.Select());
         }
         #endregion
 
-        #region [- create -]
-        //[Route("Create")]
+
+        #region [- Create() -] 
         #region [- Get -]
-        // GET: People/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
@@ -43,106 +42,87 @@ namespace OnlineShopping.Controllers
         #endregion
 
         #region [- Post -]
-        // POST: People/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,LastName,Age")] Person person)
+        public ActionResult Create([Bind(Include = "CategoryID,Title,Information")] Category category)
         {
             if (ModelState.IsValid)
             {
-                Ref_PersonCrud.Insert(person);
-                return RedirectToAction("index");
+                Ref_CategoryCrud.Insert(category);
+                return RedirectToAction("Index");
             }
 
-            return View(person);
+            return View(category);
         }
         #endregion
         #endregion
 
-        #region [- Edit -]
-        #region [- Get -]
-        // GET: People/Edit/5
+
+        #region [- Edit() -]
+
+        #region [- Get -] 
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var person = Ref_PersonCrud.Find(id);
-            if (person == null)
+            var category = Ref_CategoryCrud.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            return View(category);
         }
         #endregion
 
         #region [- Post -]
-        // POST: People/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,LastName,Age")] Person person)
+        public ActionResult Edit([Bind(Include = "CategoryID,Title,Information")] Category category)
         {
             if (ModelState.IsValid)
             {
-                Ref_PersonCrud.Update(person);
+                Ref_CategoryCrud.Update(category);
                 return RedirectToAction("Index");
             }
-            return View(person);
+            return View(category);
         }
         #endregion
         #endregion
 
-        #region [- Delete -] 
-        #region [- Get -] 
-        // GET: People/Delete/5
+        // GET: Categories/Delete/5
+        #region [- Get -]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           var person  = Ref_PersonCrud.Find(id);
-            if (person == null)
+            var category = Ref_CategoryCrud.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
-        }
+            return View(category);
+        } 
         #endregion
 
-        #region [- Post -]
-        // POST: People/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ref_PersonCrud.Delete(id);
+            Ref_CategoryCrud.Delete(id);
             return RedirectToAction("Index");
         }
-        #endregion
-        #endregion
-
-        #region [-  Details(int? id) -]
-        // GET: People/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var person = Ref_PersonCrud.Find(id);
-            if (person == null)
-            {
-                return HttpNotFound();
-            }
-            return View(person);
-        } 
-        #endregion
 
         #endregion
     }

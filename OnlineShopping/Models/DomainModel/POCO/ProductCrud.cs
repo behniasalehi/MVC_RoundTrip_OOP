@@ -7,26 +7,27 @@ using System.Web;
 
 namespace OnlineShopping.Models.DomainModel.POCO
 {
-    public class PersonCrud
+    public class ProductCrud
     {
         #region [- ctor -]
-        public PersonCrud()
+        public ProductCrud()
         {
 
         }
         #endregion
 
-        #region [- Tasks -] 
+        #region [- Tasks -]
 
         #region [- Select() -]
-        public List<Models.DomainModel.DTO.EF.Person> Select()
+        public List<Product> Select()
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    var q = context.Person.ToList();
-                    return q;
+                    var product = context.Product.Include(p => p.Category);
+                    
+                    return product.ToList();
                 }
                 catch (Exception)
                 {
@@ -42,16 +43,16 @@ namespace OnlineShopping.Models.DomainModel.POCO
                 }
             }
         }
-        #endregion 
+        #endregion
 
-        #region [- Insert(Person ref_Person) -]
-        public void Insert(Person ref_Person)
+        #region [- Insert(Category ref_Category) -]
+        public void Insert(Product ref_Product)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    context.Person.Add(ref_Person);
+                    context.Product.Add(ref_Product);
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -72,14 +73,16 @@ namespace OnlineShopping.Models.DomainModel.POCO
         #endregion
 
         #region [- Find(int? id) -]
-        public Person Find(int? id)
+        public Product Find(int? id)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    Person person = context.Person.Find(id);
-                    return person;
+
+                   
+                    Product product= context.Product.Find(id);
+                    return product;
                 }
                 catch (Exception)
                 {
@@ -97,14 +100,14 @@ namespace OnlineShopping.Models.DomainModel.POCO
         }
         #endregion
 
-        #region [- Update(Person person) -]
-        public void Update(Person person)
+        #region [- Update(Category category) -]
+        public void Update(Product product)
         {
             using (var context = new OnlineShoppingEntities())
             {
                 try
                 {
-                    context.Entry(person).State = EntityState.Modified;
+                    context.Entry(product).State = EntityState.Modified;
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -131,8 +134,9 @@ namespace OnlineShopping.Models.DomainModel.POCO
             {
                 try
                 {
-                    Person person = context.Person.Find(id);
-                    context.Person.Remove(person);
+                    Category ref_Category = new Category { CategoryID = id };
+                    context.Category.Attach(ref_Category);
+                    context.Entry(ref_Category).State = System.Data.Entity.EntityState.Deleted;
                     context.SaveChanges();
 
                 }
@@ -151,9 +155,39 @@ namespace OnlineShopping.Models.DomainModel.POCO
 
             }
 
-        } 
+        }
         #endregion
 
+        #region [- CategoryList() -]
+        public List<Category> CategoryList()
+        {
+            using (var context = new OnlineShoppingEntities())
+            {
+                try
+                {
+                    var q = context.Category.ToList();
+                    return q;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    if (context != null)
+                    {
+                        context.Dispose();
+                    }
+                }
+            }
+        }
         #endregion
+
+
+        #endregion
+
+
+
     }
 }
